@@ -7,281 +7,381 @@
 <title>Faux AI</title>
 
 <style>
-    * {
-        box-sizing: border-box;
+
+/* =========================================================
+   BASIC PAGE
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #343541;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.topbar {
+    height: 60px;
+    min-height: 60px;
+
+    background: #202123;
+    border-bottom: 1px solid #444;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.logo-icon {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: #19c37d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+}
+
+.fake-label {
+    position: absolute;
+    right: 15px;
+
+    background: #ff4d4d;
+
+    color: white;
+
+    font-size: 10px;
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   CHAT
+========================================================= */
+
+#chat {
+    flex: 1;
+
+    overflow-y: auto;
+
+    scroll-behavior: smooth;
+}
+
+.message {
+    width: 100%;
+
+    padding: 22px 20px;
+}
+
+.message-inner {
+    max-width: 900px;
+
+    margin: auto;
+
+    display: flex;
+
+    gap: 16px;
+
+    align-items: flex-start;
+}
+
+.message.user {
+    background: #343541;
+}
+
+.message.ai {
+    background: #444654;
+}
+
+
+/* =========================================================
+   AVATARS
+========================================================= */
+
+.avatar {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+
+    border-radius: 6px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.user-avatar {
+    background: #6c63ff;
+}
+
+.ai-avatar {
+    background: #19c37d;
+}
+
+
+/* =========================================================
+   MESSAGE TEXT
+========================================================= */
+
+.message-text {
+    padding-top: 5px;
+
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   TYPING ANIMATION
+========================================================= */
+
+.typing-dots {
+    display: flex;
+
+    gap: 4px;
+
+    padding-top: 9px;
+}
+
+.typing-dots span {
+    width: 7px;
+    height: 7px;
+
+    background: #aaa;
+
+    border-radius: 50%;
+
+    animation: bounce 1.2s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes bounce {
+
+    0%,
+    60%,
+    100% {
+        transform: translateY(0);
     }
 
-    html, body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        font-family: Arial, Helvetica, sans-serif;
+    30% {
+        transform: translateY(-5px);
     }
 
-    body {
-        background: #343541;
-        color: white;
-        display: flex;
-        flex-direction: column;
-    }
+}
 
-    /* =========================
-       TOP BAR
-    ========================= */
+
+/* =========================================================
+   INPUT AREA
+========================================================= */
+
+.input-area {
+    background: #343541;
+
+    padding: 15px 15px 20px;
+}
+
+.input-container {
+    max-width: 900px;
+
+    margin: auto;
+}
+
+.input-box {
+    display: flex;
+
+    align-items: center;
+
+    background: #40414f;
+
+    border: 1px solid #565869;
+
+    border-radius: 10px;
+
+    padding: 7px;
+
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+#promptInput {
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 16px;
+
+    padding: 11px;
+
+    min-width: 0;
+}
+
+#promptInput::placeholder {
+    color: #aaa;
+}
+
+#sendButton {
+    border: none;
+
+    background: #19c37d;
+
+    color: white;
+
+    border-radius: 7px;
+
+    padding: 11px 18px;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.15s;
+}
+
+#sendButton:hover {
+    background: #16a96c;
+}
+
+#sendButton:active {
+    transform: scale(0.96);
+}
+
+.footer-text {
+    max-width: 900px;
+
+    margin: 8px auto 0;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: #999;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
 
     .topbar {
-        height: 60px;
-        min-height: 60px;
-        background: #202123;
-        border-bottom: 1px solid #444;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        font-size: 19px;
-        font-weight: bold;
-    }
+        justify-content: flex-start;
 
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-    }
-
-    .logo-icon {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        background: #19c37d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
+        padding-left: 15px;
     }
 
     .fake-label {
-        position: absolute;
-        right: 15px;
-        background: #ff4d4d;
-        color: white;
-        font-size: 10px;
-        padding: 5px 8px;
-        border-radius: 5px;
-        letter-spacing: 0.5px;
-    }
-
-    /* =========================
-       CHAT
-    ========================= */
-
-    #chat {
-        flex: 1;
-        overflow-y: auto;
-        scroll-behavior: smooth;
+        display: none;
     }
 
     .message {
-        width: 100%;
-        padding: 22px 20px;
+        padding: 17px 12px;
     }
 
     .message-inner {
-        max-width: 900px;
-        margin: auto;
-        display: flex;
-        gap: 16px;
-        align-items: flex-start;
-    }
-
-    .message.user {
-        background: #343541;
-    }
-
-    .message.ai {
-        background: #444654;
+        gap: 10px;
     }
 
     .avatar {
-        width: 34px;
-        height: 34px;
-        min-width: 34px;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: 14px;
-    }
+        width: 30px;
+        height: 30px;
 
-    .user-avatar {
-        background: #6c63ff;
-    }
-
-    .ai-avatar {
-        background: #19c37d;
-    }
-
-    .message-text {
-        padding-top: 5px;
-        line-height: 1.6;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-    }
-
-    /* =========================
-       TYPING
-    ========================= */
-
-    .typing-dots {
-        display: flex;
-        gap: 4px;
-        padding-top: 9px;
-    }
-
-    .typing-dots span {
-        width: 7px;
-        height: 7px;
-        background: #aaa;
-        border-radius: 50%;
-        animation: bounce 1.2s infinite;
-    }
-
-    .typing-dots span:nth-child(2) {
-        animation-delay: 0.15s;
-    }
-
-    .typing-dots span:nth-child(3) {
-        animation-delay: 0.3s;
-    }
-
-    @keyframes bounce {
-        0%, 60%, 100% {
-            transform: translateY(0);
-        }
-
-        30% {
-            transform: translateY(-5px);
-        }
-    }
-
-    /* =========================
-       INPUT AREA
-    ========================= */
-
-    .input-area {
-        background: #343541;
-        padding: 15px 15px 20px;
-    }
-
-    .input-container {
-        max-width: 900px;
-        margin: auto;
-    }
-
-    .input-box {
-        display: flex;
-        align-items: center;
-        background: #40414f;
-        border: 1px solid #565869;
-        border-radius: 10px;
-        padding: 7px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        min-width: 30px;
     }
 
     #promptInput {
-        flex: 1;
-        border: none;
-        outline: none;
-        background: transparent;
-        color: white;
-        font-size: 16px;
-        padding: 11px;
-        min-width: 0;
-    }
-
-    #promptInput::placeholder {
-        color: #aaa;
+        font-size: 15px;
     }
 
     #sendButton {
-        border: none;
-        background: #19c37d;
-        color: white;
-        border-radius: 7px;
-        padding: 11px 18px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.15s;
+        padding: 10px 14px;
     }
 
-    #sendButton:hover {
-        background: #16a96c;
-    }
+}
 
-    #sendButton:active {
-        transform: scale(0.96);
-    }
-
-    .footer-text {
-        max-width: 900px;
-        margin: 8px auto 0;
-        text-align: center;
-        font-size: 11px;
-        color: #999;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
-
-    @media (max-width: 600px) {
-
-        .topbar {
-            justify-content: flex-start;
-            padding-left: 15px;
-        }
-
-        .fake-label {
-            display: none;
-        }
-
-        .message {
-            padding: 17px 12px;
-        }
-
-        .message-inner {
-            gap: 10px;
-        }
-
-        .avatar {
-            width: 30px;
-            height: 30px;
-            min-width: 30px;
-        }
-
-        #promptInput {
-            font-size: 15px;
-        }
-
-        #sendButton {
-            padding: 10px 14px;
-        }
-    }
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
+
+<!-- =======================================================
      HEADER
-========================= -->
+======================================================== -->
 
 <div class="topbar">
 
     <div class="logo">
-        <div class="logo-icon">F</div>
-        <div>Faux AI</div>
+
+        <div class="logo-icon">
+            F
+        </div>
+
+        <div>
+            Faux AI
+        </div>
+
     </div>
+
 
     <div class="fake-label">
         NOT ACTUALLY AI
@@ -290,11 +390,15 @@
 </div>
 
 
-<!-- =========================
+
+<!-- =======================================================
      CHAT
-========================= -->
+======================================================== -->
 
 <div id="chat">
+
+
+    <!-- FIRST AI MESSAGE -->
 
     <div class="message ai">
 
@@ -312,12 +416,14 @@
 
     </div>
 
+
 </div>
 
 
-<!-- =========================
+
+<!-- =======================================================
      INPUT
-========================= -->
+======================================================== -->
 
 <div class="input-area">
 
@@ -338,6 +444,7 @@
 
         </div>
 
+
         <div class="footer-text">
             Faux AI can make mistakes. It is also completely fake.
         </div>
@@ -347,163 +454,166 @@
 </div>
 
 
+
 <script>
 
-/* ============================================================
-   ============================================================
-   
-                       FAUX AI DATABASE
-   
-   ============================================================
-   
-   THIS IS THE MAIN PART YOU EDIT.
-   
-   To add a new response, copy this:
-   
+
+/* =========================================================
+   =========================================================
+
+                     FAUX AI DATABASE
+
+   =========================================================
+
+   THIS IS THE ONLY PART YOU REALLY NEED TO EDIT.
+
+   Add responses like this:
+
    {
        prompt: "#a hello",
        answer: "Hello!"
    },
-   
-   Then change the prompt and answer.
-   
-   ============================================================ */
+
+   ========================================================= */
 
 
-/* ============================================================
-   AVAILABLE TAGS
-   
-   #a = EXACT
-   
-   The entire prompt must match.
-   
-   "hello"
-   "HELLO"
-   "HeLLo"
-   
-   All work because Faux AI ignores capitalization.
-   
-   ============================================================ */
+/* =========================================================
+   TAGS
+========================================================= */
 
 
-/* ============================================================
-   
-   #c = CONTAINS
-   
-   Activates if the trigger appears anywhere.
-   
-   Example:
-   
-   #c pizza
-   
-   Matches:
-   
-   "I like pizza"
-   "pizza is good"
-   "do you like pizza?"
-   
-   ============================================================ */
+/*
+
+#a
+EXACT MATCH
+
+#a hello
+
+Matches:
+
+hello
+HELLO
+HeLLo
+
+Does NOT match:
+
+hello there
 
 
-/* ============================================================
-   
-   #s = STARTS WITH
-   
-   Activates if the prompt starts with the trigger.
-   
-   Example:
-   
-   #s tell me
-   
-   Matches:
-   
-   "tell me a joke"
-   "tell me something"
-   
-   ============================================================ */
+------------------------------------------------------------
 
 
-/* ============================================================
-   
-   #e = ENDS WITH
-   
-   Activates if the prompt ends with the trigger.
-   
-   Example:
-   
-   #e please
-   
-   Matches:
-   
-   "help me please"
-   "tell me please"
-   
-   ============================================================ */
+#c
+CONTAINS
+
+#c pizza
+
+Matches:
+
+pizza
+I like pizza
+pizza is good
+do you like pizza?
 
 
-/* ============================================================
-   
-   #w = WHOLE WORD
-   
-   Matches a complete word.
-   
-   Example:
-   
-   #w banana
-   
-   Matches:
-   
-   "banana"
-   "I like banana"
-   
-   But NOT:
-   
-   "bananas"
-   
-   ============================================================ */
+------------------------------------------------------------
 
 
-/* ============================================================
-   
-   #i = IGNORE PUNCTUATION
-   
-   Like #a, but punctuation doesn't matter.
-   
-   Example:
-   
-   #i hello
-   
-   Matches:
-   
-   "hello"
-   "hello!"
-   "hello?"
-   "HELLO!!!"
-   
-   ============================================================ */
+#s
+STARTS WITH
+
+#s tell me
+
+Matches:
+
+tell me a joke
+tell me something
+tell me about dinosaurs
 
 
-/* ============================================================
-   
-   #r = RANDOM
-   
-   Put multiple #r responses with the same prompt.
-   
-   Faux AI randomly chooses one.
-   
-   ============================================================ */
+------------------------------------------------------------
 
 
-/* ============================================================
-   
-   ADD YOUR RESPONSES BELOW
-   
-   ============================================================ */
+#e
+ENDS WITH
 
+#e please
+
+Matches:
+
+help me please
+tell me please
+
+
+------------------------------------------------------------
+
+
+#w
+WHOLE WORD
+
+#w cat
+
+Matches:
+
+cat
+I like cat
+
+Does NOT match:
+
+cats
+catalog
+
+
+------------------------------------------------------------
+
+
+#i
+IGNORE PUNCTUATION
+
+#i hello
+
+Matches:
+
+hello
+hello!
+hello?
+HELLO!!!
+
+
+------------------------------------------------------------
+
+
+#r
+RANDOM RESPONSE
+
+#r hello
+
+You can have multiple:
+
+#r hello
+#r hello
+#r hello
+
+Faux AI randomly chooses ONE of them.
+
+IMPORTANT:
+
+#r responses are kept separate from
+#a, #c, #s, #e, #w and #i responses.
+
+*/
+
+
+/* =========================================================
+   RESPONSE DATABASE
+========================================================= */
 
 const responses = [
 
-    /* BASIC RESPONSES */
+
+    /* =====================================================
+       EXACT RESPONSES
+    ===================================================== */
 
     {
         prompt: "#a hello",
@@ -531,7 +641,9 @@ const responses = [
     },
 
 
-    /* ABOUT FAUX AI */
+    /* =====================================================
+       FAUX AI
+    ===================================================== */
 
     {
         prompt: "#a what is your name",
@@ -554,7 +666,9 @@ const responses = [
     },
 
 
-    /* SIMPLE QUESTIONS */
+    /* =====================================================
+       SIMPLE QUESTIONS
+    ===================================================== */
 
     {
         prompt: "#a how are you",
@@ -572,7 +686,9 @@ const responses = [
     },
 
 
-    /* CONTAINS EXAMPLE */
+    /* =====================================================
+       CONTAINS
+    ===================================================== */
 
     {
         prompt: "#c pizza",
@@ -590,7 +706,9 @@ const responses = [
     },
 
 
-    /* STARTS WITH EXAMPLE */
+    /* =====================================================
+       STARTS WITH
+    ===================================================== */
 
     {
         prompt: "#s tell me",
@@ -603,7 +721,9 @@ const responses = [
     },
 
 
-    /* ENDS WITH EXAMPLE */
+    /* =====================================================
+       ENDS WITH
+    ===================================================== */
 
     {
         prompt: "#e please",
@@ -611,7 +731,9 @@ const responses = [
     },
 
 
-    /* WHOLE WORD EXAMPLE */
+    /* =====================================================
+       WHOLE WORD
+    ===================================================== */
 
     {
         prompt: "#w banana",
@@ -619,15 +741,49 @@ const responses = [
     },
 
 
-    /* IGNORE PUNCTUATION EXAMPLE */
+    /* =====================================================
+       IGNORE PUNCTUATION
+    ===================================================== */
 
     {
-        prompt: "#i hello!",
+        prompt: "#i hello",
         answer: "Hello!"
     },
 
 
-    /* RANDOM RESPONSES */
+    /* =====================================================
+       RANDOM RESPONSES
+
+       THESE ARE THE IMPORTANT ONES.
+
+       All three have:
+
+       #r hello
+
+       So one of these three will be chosen randomly.
+    ===================================================== */
+
+    {
+        prompt: "#r hello",
+        answer: "Hello!"
+    },
+
+    {
+        prompt: "#r hello",
+        answer: "Hey there!"
+    },
+
+    {
+        prompt: "#r hello",
+        answer: "Greetings, human."
+    },
+
+
+    /* =====================================================
+       ANOTHER RANDOM GROUP
+
+       These ONLY randomize between themselves.
+    ===================================================== */
 
     {
         prompt: "#r tell me a joke",
@@ -645,7 +801,9 @@ const responses = [
     },
 
 
-    /* RANDOM GREETINGS */
+    /* =====================================================
+       ANOTHER RANDOM GROUP
+    ===================================================== */
 
     {
         prompt: "#r greetings",
@@ -662,26 +820,23 @@ const responses = [
         answer: "Oh. You're back."
     }
 
+
 ];
 
 
-/* ============================================================
-   ============================================================
-   
-                     RESPONSE SYSTEM
-   
-   DO NOT EDIT BELOW THIS LINE
-   
-   ============================================================
-   ============================================================ */
+
+/* =========================================================
+   =========================================================
+
+                     TEXT FUNCTIONS
+
+   =========================================================
+   ========================================================= */
 
 
-/* ------------------------------------------------------------
-   Normalize text
-   
-   This makes everything lowercase.
-   
-   ------------------------------------------------------------ */
+/* ---------------------------------------------------------
+   Convert text to lowercase and remove spaces at the ends
+--------------------------------------------------------- */
 
 function normalizeText(text) {
 
@@ -692,203 +847,282 @@ function normalizeText(text) {
 }
 
 
-/* ------------------------------------------------------------
+/* ---------------------------------------------------------
    Remove punctuation
-   ------------------------------------------------------------ */
+--------------------------------------------------------- */
 
 function removePunctuation(text) {
 
-    return text.replace(/[.,!?;:'"()[\]{}\-_/\\]/g, "");
+    return text.replace(
+        /[.,!?;:'"()[\]{}\-_/\\]/g,
+        ""
+    );
 
 }
 
 
-/* ------------------------------------------------------------
-   Get tag and trigger
-   ------------------------------------------------------------ */
+/* ---------------------------------------------------------
+   Parse a response rule
+--------------------------------------------------------- */
 
-function parseResponseRule(rule) {
+function parseRule(rule) {
 
     let tag = "#a";
+
     let trigger = rule.trim();
 
+
     /*
-       Check whether the rule starts with a tag.
+       If the rule starts with #,
+       find the first space.
     */
 
-    if (rule.trim().startsWith("#")) {
+    if (
+        rule.trim().startsWith("#")
+    ) {
 
-        const space =
+        const firstSpace =
             rule.indexOf(" ");
 
-        if (space !== -1) {
+
+        if (
+            firstSpace !== -1
+        ) {
 
             tag =
                 rule
-                .substring(0, space)
+                .substring(
+                    0,
+                    firstSpace
+                )
                 .toLowerCase();
+
 
             trigger =
                 rule
-                .substring(space + 1)
+                .substring(
+                    firstSpace + 1
+                )
                 .trim();
 
         }
 
     }
 
+
     return {
+
         tag: tag,
-        trigger: normalizeText(trigger)
+
+        trigger:
+            normalizeText(trigger)
+
     };
 
 }
 
 
-/* ------------------------------------------------------------
-   Check whether a response matches
-   ------------------------------------------------------------ */
 
-function responseMatches(input, item) {
+/* =========================================================
+   CHECK NORMAL MATCH
+========================================================= */
+
+function checkNormalMatch(
+    input,
+    item
+) {
 
     const rule =
-        parseResponseRule(item.prompt);
+        parseRule(item.prompt);
+
 
     let userText =
         normalizeText(input);
+
 
     let trigger =
         rule.trigger;
 
 
-    /* --------------------------------
-       #A
-       Exact match
-    -------------------------------- */
+    /* -----------------------------------------------------
+       EXACT
+    ----------------------------------------------------- */
 
-    if (rule.tag === "#a") {
+    if (
+        rule.tag === "#a"
+    ) {
 
-        return userText === trigger;
-
-    }
-
-
-    /* --------------------------------
-       #C
-       Contains
-    -------------------------------- */
-
-    if (rule.tag === "#c") {
-
-        return userText.includes(trigger);
+        return (
+            userText === trigger
+        );
 
     }
 
 
-    /* --------------------------------
-       #S
-       Starts with
-    -------------------------------- */
+    /* -----------------------------------------------------
+       CONTAINS
+    ----------------------------------------------------- */
 
-    if (rule.tag === "#s") {
+    if (
+        rule.tag === "#c"
+    ) {
 
-        return userText.startsWith(trigger);
-
-    }
-
-
-    /* --------------------------------
-       #E
-       Ends with
-    -------------------------------- */
-
-    if (rule.tag === "#e") {
-
-        return userText.endsWith(trigger);
+        return (
+            userText.includes(trigger)
+        );
 
     }
 
 
-    /* --------------------------------
-       #W
-       Whole word
-    -------------------------------- */
+    /* -----------------------------------------------------
+       STARTS WITH
+    ----------------------------------------------------- */
 
-    if (rule.tag === "#w") {
+    if (
+        rule.tag === "#s"
+    ) {
+
+        return (
+            userText.startsWith(trigger)
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       ENDS WITH
+    ----------------------------------------------------- */
+
+    if (
+        rule.tag === "#e"
+    ) {
+
+        return (
+            userText.endsWith(trigger)
+        );
+
+    }
+
+
+    /* -----------------------------------------------------
+       WHOLE WORD
+    ----------------------------------------------------- */
+
+    if (
+        rule.tag === "#w"
+    ) {
 
         const words =
             userText.split(/\s+/);
 
-        return words.includes(trigger);
+
+        return (
+            words.includes(trigger)
+        );
 
     }
 
 
-    /* --------------------------------
-       #I
-       Ignore punctuation
-    -------------------------------- */
+    /* -----------------------------------------------------
+       IGNORE PUNCTUATION
+    ----------------------------------------------------- */
 
-    if (rule.tag === "#i") {
+    if (
+        rule.tag === "#i"
+    ) {
 
         userText =
-            removePunctuation(userText);
+            removePunctuation(
+                userText
+            );
+
 
         trigger =
-            removePunctuation(trigger);
-
-        return userText === trigger;
-
-    }
+            removePunctuation(
+                trigger
+            );
 
 
-    /* --------------------------------
-       #R
-       Random
-   
-       #R works like exact matching,
-       but multiple matching responses
-       can exist.
-    -------------------------------- */
-
-    if (rule.tag === "#r") {
-
-        return userText === trigger;
+        return (
+            userText === trigger
+        );
 
     }
 
 
-    /* Unknown tag */
+    /*
+       #r is deliberately NOT handled here.
+
+       Random responses get handled separately below.
+    */
+
 
     return false;
 
 }
 
 
-/* ------------------------------------------------------------
-   Find response
-   ------------------------------------------------------------ */
+
+/* =========================================================
+   GET AI RESPONSE
+========================================================= */
 
 function getAIResponse(input) {
 
-    const matches = [];
+
+    const normalizedInput =
+        normalizeText(input);
 
 
-    /*
-       Go through every response
-       in the database.
-    */
 
-    for (const item of responses) {
+    /* =====================================================
+       STEP 1
+
+       CHECK RANDOM RESPONSES FIRST
+
+       This is what fixes #r.
+    ===================================================== */
+
+
+    const randomMatches = [];
+
+
+    for (
+        const item of responses
+    ) {
+
+
+        const rule =
+            parseRule(
+                item.prompt
+            );
+
+
+        /*
+           Only look at #r.
+        */
 
         if (
-            responseMatches(
-                input,
-                item
-            )
+            rule.tag !== "#r"
         ) {
 
-            matches.push(item);
+            continue;
+
+        }
+
+
+        /*
+           #r uses exact matching.
+        */
+
+        if (
+            normalizedInput ===
+            rule.trigger
+        ) {
+
+            randomMatches.push(
+                item
+            );
 
         }
 
@@ -896,138 +1130,241 @@ function getAIResponse(input) {
 
 
     /*
-       No response found.
+       If there are #r responses,
+       choose ONLY from those.
     */
 
-    if (matches.length === 0) {
+    if (
+        randomMatches.length > 0
+    ) {
 
-        return "I am unable to answer that.";
+        const randomIndex =
+            Math.floor(
+                Math.random() *
+                randomMatches.length
+            );
+
+
+        return (
+            randomMatches[
+                randomIndex
+            ].answer
+        );
 
     }
 
 
-    /*
-       If there are multiple matching
-       responses, choose one randomly.
-    */
 
-    const selected =
-        matches[
-            Math.floor(
-                Math.random() * matches.length
+    /* =====================================================
+       STEP 2
+
+       CHECK NORMAL RESPONSES
+    ===================================================== */
+
+
+    for (
+        const item of responses
+    ) {
+
+
+        const rule =
+            parseRule(
+                item.prompt
+            );
+
+
+        /*
+           Skip #r because we already
+           handled those above.
+        */
+
+        if (
+            rule.tag === "#r"
+        ) {
+
+            continue;
+
+        }
+
+
+        if (
+            checkNormalMatch(
+                input,
+                item
             )
-        ];
+        ) {
+
+            return item.answer;
+
+        }
+
+    }
 
 
-    return selected.answer;
+
+    /* =====================================================
+       NOTHING MATCHED
+    ===================================================== */
+
+    return (
+        "I am unable to answer that."
+    );
 
 }
 
 
-/* ============================================================
-   ADD MESSAGE TO CHAT
-   ============================================================ */
 
-function addMessage(text, sender) {
+/* =========================================================
+   =========================================================
+
+                       CHAT FUNCTIONS
+
+   =========================================================
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   Add message
+--------------------------------------------------------- */
+
+function addMessage(
+    text,
+    sender
+) {
+
 
     const message =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     message.className =
         "message " + sender;
 
 
     const inner =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     inner.className =
         "message-inner";
 
 
     const avatar =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     avatar.className =
         "avatar " +
         (
             sender === "user"
-            ? "user-avatar"
-            : "ai-avatar"
+                ? "user-avatar"
+                : "ai-avatar"
         );
+
 
     avatar.textContent =
         sender === "user"
-        ? "U"
-        : "F";
+            ? "U"
+            : "F";
 
 
-    const textElement =
-        document.createElement("div");
+    const textMessage =
+        document.createElement(
+            "div"
+        );
+   textElement.className =
+    "message-text";
 
-    textElement.className =
-        "message-text";
-
-    textElement.textContent =
-        text;
-
-
-    inner.appendChild(avatar);
-
-    inner.appendChild(textElement);
-
-    message.appendChild(inner);
-
-    chat.appendChild(message);
+textElement.textContent =
+    text;
 
 
-    /*
-       Scroll to the newest message.
-    */
+inner.appendChild(
+    avatar
+);
 
-    chat.scrollTop =
-        chat.scrollHeight;
+
+inner.appendChild(
+    textElement
+);
+
+
+message.appendChild(
+    inner
+);
+
+
+chat.appendChild(
+    message
+);
+
+
+chat.scrollTop =
+    chat.scrollHeight;
 
 }
 
 
-/* ============================================================
-   SHOW TYPING
-   ============================================================ */
+/* ---------------------------------------------------------
+   Show typing
+--------------------------------------------------------- */
 
 function showTyping() {
 
+
     const message =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     message.className =
         "message ai";
+
 
     message.id =
         "typingMessage";
 
 
     const inner =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     inner.className =
         "message-inner";
 
 
     const avatar =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     avatar.className =
         "avatar ai-avatar";
+
 
     avatar.textContent =
         "F";
 
 
     const dots =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     dots.className =
         "typing-dots";
+
 
     dots.innerHTML = `
         <span></span>
@@ -1036,13 +1373,24 @@ function showTyping() {
     `;
 
 
-    inner.appendChild(avatar);
+    inner.appendChild(
+        avatar
+    );
 
-    inner.appendChild(dots);
 
-    message.appendChild(inner);
+    inner.appendChild(
+        dots
+    );
 
-    chat.appendChild(message);
+
+    message.appendChild(
+        inner
+    );
+
+
+    chat.appendChild(
+        message
+    );
 
 
     chat.scrollTop =
@@ -1051,9 +1399,9 @@ function showTyping() {
 }
 
 
-/* ============================================================
-   REMOVE TYPING
-   ============================================================ */
+/* ---------------------------------------------------------
+   Hide typing
+--------------------------------------------------------- */
 
 function hideTyping() {
 
@@ -1063,17 +1411,15 @@ function hideTyping() {
         );
 
     if (typing) {
-
         typing.remove();
-
     }
 
 }
 
 
-/* ============================================================
+/* =========================================================
    SEND MESSAGE
-   ============================================================ */
+========================================================= */
 
 function sendMessage() {
 
@@ -1081,20 +1427,10 @@ function sendMessage() {
         promptInput.value.trim();
 
 
-    /*
-       Don't send empty messages.
-    */
-
-    if (!input) {
-
+    if (input === "") {
         return;
-
     }
 
-
-    /*
-       Show user message.
-    */
 
     addMessage(
         input,
@@ -1102,24 +1438,11 @@ function sendMessage() {
     );
 
 
-    /*
-       Clear input.
-    */
-
     promptInput.value = "";
 
 
-    /*
-       Show fake AI typing.
-    */
-
     showTyping();
 
-
-    /*
-       Wait a little bit to make it
-       look like Faux AI is thinking.
-    */
 
     const delay =
         500 +
@@ -1128,28 +1451,39 @@ function sendMessage() {
         );
 
 
-    setTimeout(() => {
+    setTimeout(
+        function() {
 
-        hideTyping();
-
-
-        const answer =
-            getAIResponse(input);
+            hideTyping();
 
 
-        addMessage(
-            answer,
-            "ai"
-        );
+            const answer =
+                getAIResponse(
+                    input
+                );
 
-    }, delay);
+
+            addMessage(
+                answer,
+                "ai"
+            );
+
+        },
+        delay
+    );
 
 }
 
 
-/* ============================================================
-   BUTTON
-   ============================================================ */
+/* =========================================================
+   SEND BUTTON
+========================================================= */
+
+const sendButton =
+    document.getElementById(
+        "sendButton"
+    );
+
 
 sendButton.addEventListener(
     "click",
@@ -1157,17 +1491,21 @@ sendButton.addEventListener(
 );
 
 
-/* ============================================================
-   ENTER KEY
-   ============================================================ */
+/* =========================================================
+   INPUT BOX
+========================================================= */
+
+const promptInput =
+    document.getElementById(
+        "promptInput"
+    );
+
 
 promptInput.addEventListener(
     "keydown",
     function(event) {
 
-        if (
-            event.key === "Enter"
-           ) {
+        if (event.key === "Enter") {
 
             event.preventDefault();
 
@@ -1177,6 +1515,16 @@ promptInput.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+const chat =
+    document.getElementById(
+        "chat"
+    );
 
 </script>
 
