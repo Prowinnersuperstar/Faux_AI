@@ -1274,41 +1274,45 @@ function addMessage(
             : "F";
 
 
-    const textMessage =
+    const textElement =
         document.createElement(
             "div"
         );
-   textElement.className =
-    "message-text";
-
-textElement.textContent =
-    text;
 
 
-inner.appendChild(
-    avatar
-);
+    textElement.className =
+        "message-text";
 
 
-inner.appendChild(
-    textElement
-);
+    textElement.textContent =
+        text;
 
 
-message.appendChild(
-    inner
-);
+    inner.appendChild(
+        avatar
+    );
 
 
-chat.appendChild(
-    message
-);
+    inner.appendChild(
+        textElement
+    );
 
 
-chat.scrollTop =
-    chat.scrollHeight;
+    message.appendChild(
+        inner
+    );
+
+
+    chat.appendChild(
+        message
+    );
+
+
+    chat.scrollTop =
+        chat.scrollHeight;
 
 }
+
 
 
 /* ---------------------------------------------------------
@@ -1399,22 +1403,30 @@ function showTyping() {
 }
 
 
+
 /* ---------------------------------------------------------
    Hide typing
 --------------------------------------------------------- */
 
 function hideTyping() {
 
+
     const typing =
         document.getElementById(
             "typingMessage"
         );
 
-    if (typing) {
+
+    if (
+        typing
+    ) {
+
         typing.remove();
+
     }
 
 }
+
 
 
 /* =========================================================
@@ -1423,14 +1435,27 @@ function hideTyping() {
 
 function sendMessage() {
 
+
     const input =
         promptInput.value.trim();
 
 
-    if (input === "") {
+    /*
+       Don't send blank messages.
+    */
+
+    if (
+        input === ""
+    ) {
+
         return;
+
     }
 
+
+    /*
+       Add user message.
+    */
 
     addMessage(
         input,
@@ -1438,11 +1463,24 @@ function sendMessage() {
     );
 
 
+    /*
+       Clear textbox.
+    */
+
     promptInput.value = "";
 
 
+    /*
+       Show fake typing.
+    */
+
     showTyping();
 
+
+    /*
+       Random response delay
+       to make it look more natural.
+    */
 
     const delay =
         500 +
@@ -1454,8 +1492,13 @@ function sendMessage() {
     setTimeout(
         function() {
 
+
             hideTyping();
 
+
+            /*
+               Get predetermined answer.
+            */
 
             const answer =
                 getAIResponse(
@@ -1463,16 +1506,22 @@ function sendMessage() {
                 );
 
 
+            /*
+               Show answer.
+            */
+
             addMessage(
                 answer,
                 "ai"
             );
+
 
         },
         delay
     );
 
 }
+
 
 
 /* =========================================================
@@ -1491,6 +1540,7 @@ sendButton.addEventListener(
 );
 
 
+
 /* =========================================================
    INPUT BOX
 ========================================================= */
@@ -1501,11 +1551,18 @@ const promptInput =
     );
 
 
+/*
+   Press Enter to send.
+*/
+
 promptInput.addEventListener(
     "keydown",
     function(event) {
 
-        if (event.key === "Enter") {
+
+        if (
+            event.key === "Enter"
+        ) {
 
             event.preventDefault();
 
@@ -1525,6 +1582,7 @@ const chat =
     document.getElementById(
         "chat"
     );
+
 
 </script>
 
