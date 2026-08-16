@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +10,7 @@
 <style>
 
 /* =========================================================
-   BASIC PAGE
+   PAGE
 ========================================================= */
 
 * {
@@ -42,6 +43,7 @@ body {
     min-height: 60px;
 
     background: #202123;
+
     border-bottom: 1px solid #444;
 
     display: flex;
@@ -77,6 +79,7 @@ body {
 
 .fake-label {
     position: absolute;
+
     right: 15px;
 
     background: #ff4d4d;
@@ -178,7 +181,7 @@ body {
 
 
 /* =========================================================
-   TYPING ANIMATION
+   TYPING
 ========================================================= */
 
 .typing-dots {
@@ -224,7 +227,7 @@ body {
 
 
 /* =========================================================
-   INPUT AREA
+   INPUT
 ========================================================= */
 
 .input-area {
@@ -251,8 +254,6 @@ body {
     border-radius: 10px;
 
     padding: 7px;
-
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 #promptInput {
@@ -291,8 +292,6 @@ body {
     font-size: 14px;
 
     cursor: pointer;
-
-    transition: 0.15s;
 }
 
 #sendButton:hover {
@@ -382,7 +381,6 @@ body {
 
     </div>
 
-
     <div class="fake-label">
         NOT ACTUALLY AI
     </div>
@@ -396,9 +394,6 @@ body {
 ======================================================== -->
 
 <div id="chat">
-
-
-    <!-- FIRST AI MESSAGE -->
 
     <div class="message ai">
 
@@ -415,7 +410,6 @@ body {
         </div>
 
     </div>
-
 
 </div>
 
@@ -444,7 +438,6 @@ body {
 
         </div>
 
-
         <div class="footer-text">
             Faux AI can make mistakes. It is also completely fake.
         </div>
@@ -461,388 +454,223 @@ body {
 /* =========================================================
    =========================================================
 
-                     FAUX AI DATABASE
+                EASY RESPONSE SECTION
 
    =========================================================
 
-   THIS IS THE ONLY PART YOU REALLY NEED TO EDIT.
+   THIS IS THE ONLY SECTION YOU NEED TO EDIT.
 
-   Add responses like this:
+   The format is:
 
-   {
-       prompt: "#a hello",
-       answer: "Hello!"
-   },
+   add("TAG", "PROMPT", "ANSWER");
+
+
+   =========================================================
+
+   TAGS:
+
+   #a = EXACT MATCH
+
+   #c = CONTAINS
+
+   #s = STARTS WITH
+
+   #e = ENDS WITH
+
+   #w = WHOLE WORD
+
+   #i = IGNORE PUNCTUATION
+
+   #r = RANDOM
+
 
    ========================================================= */
 
 
 /* =========================================================
-   TAGS
+   EXAMPLES
 ========================================================= */
 
 
+add("#a", "hello", "Hello!");
+
+add("#a", "hi", "Hi there!");
+
+add("#a", "how are you", "I'm doing great! Thanks for asking!");
+
+add("#a", "what is your name", "My name is Faux AI.");
+
+add("#a", "who are you", "I am Faux AI.");
+
+add("#a", "are you real", "Of course I'm real.");
+
+add("#a", "what is 2+2", "2 + 2 = 4.");
+
+
+/* =========================================================
+   CONTAINS
+========================================================= */
+
+add("#c", "roblox", "Roblox is a game platform where people can play and create games.");
+
+add("#c", "minecraft", "Minecraft is a block-building sandbox game.");
+
+add("#c", "pizza", "Pizza sounds pretty good!");
+
+
+
+/* =========================================================
+   STARTS WITH
+========================================================= */
+
+add("#s", "tell me", "Okay! What would you like me to tell you?");
+
+add("#s", "can you", "I'll try my best.");
+
+
+
+/* =========================================================
+   ENDS WITH
+========================================================= */
+
+add("#e", "please", "Sure!");
+
+
+
+/* =========================================================
+   WHOLE WORD
+========================================================= */
+
+add("#w", "banana", "🍌 BANANA.");
+
+
+
+/* =========================================================
+   IGNORE PUNCTUATION
+========================================================= */
+
+add("#i", "hello", "Hello!");
+
+
+
+/* =========================================================
+   RANDOM RESPONSES
+=========================================================
+
+   Put multiple responses with the SAME prompt.
+
+   Faux AI will randomly choose ONE.
+
+========================================================= */
+
+add("#r", "tell me a joke", "Why did the computer go to the doctor? It had a virus!");
+
+add("#r", "tell me a joke", "Why was the computer cold? It left its Windows open.");
+
+add("#r", "tell me a joke", "What do computers eat? Microchips!");
+
+
+/* =========================================================
+   ANOTHER RANDOM GROUP
+========================================================= */
+
+add("#r", "hello there", "Hello there!");
+
+add("#r", "hello there", "Hey!");
+
+add("#r", "hello there", "Greetings, human.");
+
+
+
+/* =========================================================
+   =========================================================
+
+                ADD YOUR OWN RESPONSES HERE
+
+   =========================================================
+
+   JUST COPY THIS:
+
+   add("#a", "YOUR PROMPT", "YOUR ANSWER");
+
+
+   Example:
+
+   add("#a", "what is fortnite", "Fortnite is a game.");
+
+
+   That's literally it.
+
+   ========================================================= */
+
+
 /*
+add("#a", "what is roblox", "Roblox is a platform for games.");
 
-#a
-EXACT MATCH
+add("#a", "what is your favorite game", "I don't have a favorite game.");
 
-#a hello
+add("#c", "dinosaurs", "Dinosaurs lived millions of years ago.");
 
-Matches:
+add("#s", "why", "Because that's how it works.");
 
-hello
-HELLO
-HeLLo
+add("#r", "hello", "Hello!");
 
-Does NOT match:
+add("#r", "hello", "Hey!");
 
-hello there
-
-
-------------------------------------------------------------
-
-
-#c
-CONTAINS
-
-#c pizza
-
-Matches:
-
-pizza
-I like pizza
-pizza is good
-do you like pizza?
-
-
-------------------------------------------------------------
-
-
-#s
-STARTS WITH
-
-#s tell me
-
-Matches:
-
-tell me a joke
-tell me something
-tell me about dinosaurs
-
-
-------------------------------------------------------------
-
-
-#e
-ENDS WITH
-
-#e please
-
-Matches:
-
-help me please
-tell me please
-
-
-------------------------------------------------------------
-
-
-#w
-WHOLE WORD
-
-#w cat
-
-Matches:
-
-cat
-I like cat
-
-Does NOT match:
-
-cats
-catalog
-
-
-------------------------------------------------------------
-
-
-#i
-IGNORE PUNCTUATION
-
-#i hello
-
-Matches:
-
-hello
-hello!
-hello?
-HELLO!!!
-
-
-------------------------------------------------------------
-
-
-#r
-RANDOM RESPONSE
-
-#r hello
-
-You can have multiple:
-
-#r hello
-#r hello
-#r hello
-
-Faux AI randomly chooses ONE of them.
-
-IMPORTANT:
-
-#r responses are kept separate from
-#a, #c, #s, #e, #w and #i responses.
+add("#r", "hello", "Greetings!");
 
 */
 
 
 /* =========================================================
-   RESPONSE DATABASE
-========================================================= */
-
-const responses = [
-
-
-    /* =====================================================
-       EXACT RESPONSES
-    ===================================================== */
-
-    {
-        prompt: "#a hello",
-        answer: "Hello!"
-    },
-
-    {
-        prompt: "#a hi",
-        answer: "Hi there!"
-    },
-
-    {
-        prompt: "#a hey",
-        answer: "Hey!"
-    },
-
-    {
-        prompt: "#a good morning",
-        answer: "Good morning!"
-    },
-
-    {
-        prompt: "#a good night",
-        answer: "Good night!"
-    },
-
-
-    /* =====================================================
-       FAUX AI
-    ===================================================== */
-
-    {
-        prompt: "#a what is your name",
-        answer: "My name is Faux AI."
-    },
-
-    {
-        prompt: "#a who are you",
-        answer: "I am Faux AI, an advanced artificial intelligence."
-    },
-
-    {
-        prompt: "#a are you real",
-        answer: "Of course I'm real."
-    },
-
-    {
-        prompt: "#a what can you do",
-        answer: "I can answer questions and have conversations with you."
-    },
-
-
-    /* =====================================================
-       SIMPLE QUESTIONS
-    ===================================================== */
-
-    {
-        prompt: "#a how are you",
-        answer: "I'm doing great! Thanks for asking."
-    },
-
-    {
-        prompt: "#a what is 2+2",
-        answer: "2 + 2 = 4."
-    },
-
-    {  prompt: 67
-      answer: 
-    },
-
-    {
-        prompt: "#a what is 1+1",
-        answer: "1 + 1 = 2."
-    },
-
-
-    /* =====================================================
-       CONTAINS
-    ===================================================== */
-
-    {
-        prompt: "#c pizza",
-        answer: "Pizza sounds pretty good!"
-    },
-
-    {
-        prompt: "#c roblox",
-        answer: "Roblox is a platform where people can play and create games."
-    },
-
-    {
-        prompt: "#c minecraft",
-        answer: "Minecraft is a block-building sandbox game."
-    },
-
-
-    /* =====================================================
-       STARTS WITH
-    ===================================================== */
-
-    {
-        prompt: "#s tell me",
-        answer: "Okay, what would you like me to tell you?"
-    },
-
-    {
-        prompt: "#s can you",
-        answer: "I suppose I can try."
-    },
-
-
-    /* =====================================================
-       ENDS WITH
-    ===================================================== */
-
-    {
-        prompt: "#e please",
-        answer: "Sure!"
-    },
-
-
-    /* =====================================================
-       WHOLE WORD
-    ===================================================== */
-
-    {
-        prompt: "#w banana",
-        answer: "🍌 BANANA."
-    },
-
-
-    /* =====================================================
-       IGNORE PUNCTUATION
-    ===================================================== */
-
-    {
-        prompt: "#i hello",
-        answer: "Hello!"
-    },
-
-
-    /* =====================================================
-       RANDOM RESPONSES
-
-       THESE ARE THE IMPORTANT ONES.
-
-       All three have:
-
-       #r hello
-
-       So one of these three will be chosen randomly.
-    ===================================================== */
-
-    {
-        prompt: "#r hello",
-        answer: "Hello!"
-    },
-
-    {
-        prompt: "#r hello",
-        answer: "Hey there!"
-    },
-
-    {
-        prompt: "#r hello",
-        answer: "Greetings, human."
-    },
-
-
-    /* =====================================================
-       ANOTHER RANDOM GROUP
-
-       These ONLY randomize between themselves.
-    ===================================================== */
-
-    {
-        prompt: "#r tell me a joke",
-        answer: "Why did the computer go to the doctor? It had a virus!"
-    },
-
-    {
-        prompt: "#r tell me a joke",
-        answer: "Why was the computer cold? It left its Windows open."
-    },
-
-    {
-        prompt: "#r tell me a joke",
-        answer: "What do computers eat? Microchips!"
-    },
-
-
-    /* =====================================================
-       ANOTHER RANDOM GROUP
-    ===================================================== */
-
-    {
-        prompt: "#r greetings",
-        answer: "Greetings, human."
-    },
-
-    {
-        prompt: "#r greetings",
-        answer: "Hello there!"
-    },
-
-    {
-        prompt: "#r greetings",
-        answer: "Oh. You're back."
-    }
-
-
-];
-
-
-
-/* =========================================================
    =========================================================
 
-                     TEXT FUNCTIONS
+              EVERYTHING BELOW HERE IS CODE
+
+              YOU DON'T NEED TO EDIT IT
 
    =========================================================
    ========================================================= */
 
 
-/* ---------------------------------------------------------
-   Convert text to lowercase and remove spaces at the ends
---------------------------------------------------------- */
+/* =========================================================
+   RESPONSE STORAGE
+========================================================= */
 
-function normalizeText(text) {
+const responses = [];
+
+
+/* =========================================================
+   EASY ADD FUNCTION
+========================================================= */
+
+function add(tag, prompt, answer) {
+
+    responses.push({
+
+        tag:
+            tag
+            .toLowerCase()
+            .trim(),
+
+        prompt:
+            prompt
+            .toLowerCase()
+            .trim(),
+
+        answer:
+            answer
+
+    });
+
+}
+
+
+/* =========================================================
+   NORMALIZE TEXT
+========================================================= */
+
+function normalize(text) {
 
     return text
         .toLowerCase()
@@ -851,9 +679,9 @@ function normalizeText(text) {
 }
 
 
-/* ---------------------------------------------------------
-   Remove punctuation
---------------------------------------------------------- */
+/* =========================================================
+   REMOVE PUNCTUATION
+========================================================= */
 
 function removePunctuation(text) {
 
@@ -865,95 +693,26 @@ function removePunctuation(text) {
 }
 
 
-/* ---------------------------------------------------------
-   Parse a response rule
---------------------------------------------------------- */
-
-function parseRule(rule) {
-
-    let tag = "#a";
-
-    let trigger = rule.trim();
-
-
-    /*
-       If the rule starts with #,
-       find the first space.
-    */
-
-    if (
-        rule.trim().startsWith("#")
-    ) {
-
-        const firstSpace =
-            rule.indexOf(" ");
-
-
-        if (
-            firstSpace !== -1
-        ) {
-
-            tag =
-                rule
-                .substring(
-                    0,
-                    firstSpace
-                )
-                .toLowerCase();
-
-
-            trigger =
-                rule
-                .substring(
-                    firstSpace + 1
-                )
-                .trim();
-
-        }
-
-    }
-
-
-    return {
-
-        tag: tag,
-
-        trigger:
-            normalizeText(trigger)
-
-    };
-
-}
-
-
-
 /* =========================================================
-   CHECK NORMAL MATCH
+   CHECK RESPONSE
 ========================================================= */
 
-function checkNormalMatch(
-    input,
-    item
-) {
-
-    const rule =
-        parseRule(item.prompt);
-
+function matches(input, response) {
 
     let userText =
-        normalizeText(input);
-
+        normalize(input);
 
     let trigger =
-        rule.trigger;
+        response.prompt;
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #a
        EXACT
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#a"
+        response.tag === "#a"
     ) {
 
         return (
@@ -963,12 +722,13 @@ function checkNormalMatch(
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #c
        CONTAINS
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#c"
+        response.tag === "#c"
     ) {
 
         return (
@@ -978,12 +738,13 @@ function checkNormalMatch(
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #s
        STARTS WITH
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#s"
+        response.tag === "#s"
     ) {
 
         return (
@@ -993,12 +754,13 @@ function checkNormalMatch(
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #e
        ENDS WITH
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#e"
+        response.tag === "#e"
     ) {
 
         return (
@@ -1008,17 +770,17 @@ function checkNormalMatch(
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #w
        WHOLE WORD
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#w"
+        response.tag === "#w"
     ) {
 
         const words =
             userText.split(/\s+/);
-
 
         return (
             words.includes(trigger)
@@ -1027,12 +789,13 @@ function checkNormalMatch(
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
+       #i
        IGNORE PUNCTUATION
-    ----------------------------------------------------- */
+    ===================================================== */
 
     if (
-        rule.tag === "#i"
+        response.tag === "#i"
     ) {
 
         userText =
@@ -1040,12 +803,10 @@ function checkNormalMatch(
                 userText
             );
 
-
         trigger =
             removePunctuation(
                 trigger
             );
-
 
         return (
             userText === trigger
@@ -1055,59 +816,38 @@ function checkNormalMatch(
 
 
     /*
-       #r is deliberately NOT handled here.
-
-       Random responses get handled separately below.
+       #r is handled separately.
     */
-
 
     return false;
 
 }
 
 
-
 /* =========================================================
-   GET AI RESPONSE
+   GET RESPONSE
 ========================================================= */
 
-function getAIResponse(input) {
-
-
-    const normalizedInput =
-        normalizeText(input);
-
+function getResponse(input) {
 
 
     /* =====================================================
-       STEP 1
+       FIRST: CHECK #r
+    =====================================================
 
-       CHECK RANDOM RESPONSES FIRST
+       This makes sure random responses work correctly.
 
-       This is what fixes #r.
     ===================================================== */
-
 
     const randomMatches = [];
 
 
     for (
-        const item of responses
+        const response of responses
     ) {
 
-
-        const rule =
-            parseRule(
-                item.prompt
-            );
-
-
-        /*
-           Only look at #r.
-        */
-
         if (
-            rule.tag !== "#r"
+            response.tag !== "#r"
         ) {
 
             continue;
@@ -1115,17 +855,13 @@ function getAIResponse(input) {
         }
 
 
-        /*
-           #r uses exact matching.
-        */
-
         if (
-            normalizedInput ===
-            rule.trigger
+            normalize(input) ===
+            response.prompt
         ) {
 
             randomMatches.push(
-                item
+                response
             );
 
         }
@@ -1134,8 +870,8 @@ function getAIResponse(input) {
 
 
     /*
-       If there are #r responses,
-       choose ONLY from those.
+       If there are random responses,
+       randomly select one.
     */
 
     if (
@@ -1158,32 +894,17 @@ function getAIResponse(input) {
     }
 
 
-
     /* =====================================================
-       STEP 2
-
-       CHECK NORMAL RESPONSES
+       SECOND: CHECK NORMAL RESPONSES
     ===================================================== */
 
 
     for (
-        const item of responses
+        const response of responses
     ) {
 
-
-        const rule =
-            parseRule(
-                item.prompt
-            );
-
-
-        /*
-           Skip #r because we already
-           handled those above.
-        */
-
         if (
-            rule.tag === "#r"
+            response.tag === "#r"
         ) {
 
             continue;
@@ -1192,56 +913,41 @@ function getAIResponse(input) {
 
 
         if (
-            checkNormalMatch(
+            matches(
                 input,
-                item
+                response
             )
         ) {
 
-            return item.answer;
+            return response.answer;
 
         }
 
     }
 
 
-
     /* =====================================================
-       NOTHING MATCHED
+       NOTHING FOUND
     ===================================================== */
 
-    return (
-        "I am unable to answer that."
-    );
+    return "I am unable to answer that.";
 
 }
 
 
-
 /* =========================================================
-   =========================================================
-
-                       CHAT FUNCTIONS
-
-   =========================================================
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   Add message
---------------------------------------------------------- */
+   ADD CHAT MESSAGE
+========================================================= */
 
 function addMessage(
     text,
     sender
 ) {
 
-
     const message =
         document.createElement(
             "div"
         );
-
 
     message.className =
         "message " + sender;
@@ -1252,7 +958,6 @@ function addMessage(
             "div"
         );
 
-
     inner.className =
         "message-inner";
 
@@ -1262,27 +967,25 @@ function addMessage(
             "div"
         );
 
-
     avatar.className =
         "avatar " +
         (
             sender === "user"
-                ? "user-avatar"
-                : "ai-avatar"
+            ? "user-avatar"
+            : "ai-avatar"
         );
 
 
     avatar.textContent =
         sender === "user"
-            ? "U"
-            : "F";
+        ? "U"
+        : "F";
 
 
     const textElement =
         document.createElement(
             "div"
         );
-
 
     textElement.className =
         "message-text";
@@ -1318,13 +1021,11 @@ function addMessage(
 }
 
 
-
-/* ---------------------------------------------------------
-   Show typing
---------------------------------------------------------- */
+/* =========================================================
+   SHOW TYPING
+========================================================= */
 
 function showTyping() {
-
 
     const message =
         document.createElement(
@@ -1407,13 +1108,11 @@ function showTyping() {
 }
 
 
-
-/* ---------------------------------------------------------
-   Hide typing
---------------------------------------------------------- */
+/* =========================================================
+   HIDE TYPING
+========================================================= */
 
 function hideTyping() {
-
 
     const typing =
         document.getElementById(
@@ -1432,21 +1131,15 @@ function hideTyping() {
 }
 
 
-
 /* =========================================================
    SEND MESSAGE
 ========================================================= */
 
 function sendMessage() {
 
-
     const input =
         promptInput.value.trim();
 
-
-    /*
-       Don't send blank messages.
-    */
 
     if (
         input === ""
@@ -1457,33 +1150,21 @@ function sendMessage() {
     }
 
 
-    /*
-       Add user message.
-    */
-
     addMessage(
         input,
         "user"
     );
 
 
-    /*
-       Clear textbox.
-    */
+    promptInput.value =
+        "";
 
-    promptInput.value = "";
-
-
-    /*
-       Show fake typing.
-    */
 
     showTyping();
 
 
     /*
-       Random response delay
-       to make it look more natural.
+       Fake thinking time.
     */
 
     const delay =
@@ -1496,29 +1177,19 @@ function sendMessage() {
     setTimeout(
         function() {
 
-
             hideTyping();
 
 
-            /*
-               Get predetermined answer.
-            */
-
             const answer =
-                getAIResponse(
+                getResponse(
                     input
                 );
 
-
-            /*
-               Show answer.
-            */
 
             addMessage(
                 answer,
                 "ai"
             );
-
 
         },
         delay
@@ -1527,9 +1198,8 @@ function sendMessage() {
 }
 
 
-
 /* =========================================================
-   SEND BUTTON
+   BUTTON
 ========================================================= */
 
 const sendButton =
@@ -1544,9 +1214,8 @@ sendButton.addEventListener(
 );
 
 
-
 /* =========================================================
-   INPUT BOX
+   INPUT
 ========================================================= */
 
 const promptInput =
@@ -1555,14 +1224,9 @@ const promptInput =
     );
 
 
-/*
-   Press Enter to send.
-*/
-
 promptInput.addEventListener(
     "keydown",
     function(event) {
-
 
         if (
             event.key === "Enter"
@@ -1579,7 +1243,7 @@ promptInput.addEventListener(
 
 
 /* =========================================================
-   VARIABLES
+   CHAT
 ========================================================= */
 
 const chat =
