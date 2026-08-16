@@ -9,10 +9,6 @@
 
 <style>
 
-/* =========================================================
-   PAGE
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
@@ -43,7 +39,6 @@ body {
     min-height: 60px;
 
     background: #202123;
-
     border-bottom: 1px solid #444;
 
     display: flex;
@@ -102,25 +97,20 @@ body {
 
 #chat {
     flex: 1;
-
     overflow-y: auto;
-
     scroll-behavior: smooth;
 }
 
 .message {
     width: 100%;
-
     padding: 22px 20px;
 }
 
 .message-inner {
     max-width: 900px;
-
     margin: auto;
 
     display: flex;
-
     gap: 16px;
 
     align-items: flex-start;
@@ -142,7 +132,6 @@ body {
 .avatar {
     width: 34px;
     height: 34px;
-
     min-width: 34px;
 
     border-radius: 6px;
@@ -152,7 +141,6 @@ body {
     justify-content: center;
 
     font-weight: bold;
-
     font-size: 14px;
 }
 
@@ -175,20 +163,17 @@ body {
     line-height: 1.6;
 
     white-space: pre-wrap;
-
     overflow-wrap: anywhere;
 }
 
 
 /* =========================================================
-   TYPING
+   TYPING ANIMATION
 ========================================================= */
 
 .typing-dots {
     display: flex;
-
     gap: 4px;
-
     padding-top: 9px;
 }
 
@@ -232,19 +217,16 @@ body {
 
 .input-area {
     background: #343541;
-
     padding: 15px 15px 20px;
 }
 
 .input-container {
     max-width: 900px;
-
     margin: auto;
 }
 
 .input-box {
     display: flex;
-
     align-items: center;
 
     background: #40414f;
@@ -260,7 +242,6 @@ body {
     flex: 1;
 
     border: none;
-
     outline: none;
 
     background: transparent;
@@ -323,7 +304,6 @@ body {
 
     .topbar {
         justify-content: flex-start;
-
         padding-left: 15px;
     }
 
@@ -342,7 +322,6 @@ body {
     .avatar {
         width: 30px;
         height: 30px;
-
         min-width: 30px;
     }
 
@@ -365,7 +344,7 @@ body {
 
 <!-- =======================================================
      HEADER
-======================================================== -->
+======================================================= -->
 
 <div class="topbar">
 
@@ -391,7 +370,7 @@ body {
 
 <!-- =======================================================
      CHAT
-======================================================== -->
+======================================================= -->
 
 <div id="chat">
 
@@ -417,7 +396,7 @@ body {
 
 <!-- =======================================================
      INPUT
-======================================================== -->
+======================================================= -->
 
 <div class="input-area">
 
@@ -452,49 +431,32 @@ body {
 
 
 /* =========================================================
+   RESPONSE DATABASE
+   ========================================================= */
+
+const responses = [];
+
+
+/* =========================================================
+   EASY RESPONSE FUNCTION
    =========================================================
 
-                EASY RESPONSE SECTION
-
-   =========================================================
-
-   THIS IS THE ONLY SECTION YOU NEED TO EDIT.
-
-   The format is:
+   FORMAT:
 
    add("TAG", "PROMPT", "ANSWER");
-
-
-   =========================================================
-
-   TAGS:
-
-   #a = EXACT MATCH
-
-   #c = CONTAINS
-
-   #s = STARTS WITH
-
-   #e = ENDS WITH
-
-   #w = WHOLE WORD
-
-   #i = IGNORE PUNCTUATION
-
-   #r = RANDOM
-
 
    ========================================================= */
 
 
 /* =========================================================
-   EXAMPLES
+   EXAMPLE RESPONSES
 ========================================================= */
-
 
 add("#a", "hello", "Hello!");
 
 add("#a", "hi", "Hi there!");
+
+add("#a", "hey", "Hey!");
 
 add("#a", "how are you", "I'm doing great! Thanks for asking!");
 
@@ -506,106 +468,153 @@ add("#a", "are you real", "Of course I'm real.");
 
 add("#a", "what is 2+2", "2 + 2 = 4.");
 
+add("#a", "good morning", "Good morning!");
+
+add("#a", "good night", "Good night!");
+
 
 /* =========================================================
    CONTAINS
 ========================================================= */
 
-add("#c", "roblox", "Roblox is a game platform where people can play and create games.");
+add(
+    "#c",
+    "roblox",
+    "Roblox is a platform where people can play and create games."
+);
 
-add("#c", "minecraft", "Minecraft is a block-building sandbox game.");
+add(
+    "#c",
+    "minecraft",
+    "Minecraft is a block-building sandbox game."
+);
 
-add("#c", "pizza", "Pizza sounds pretty good!");
-
+add(
+    "#c",
+    "pizza",
+    "Pizza sounds pretty good!"
+);
 
 
 /* =========================================================
    STARTS WITH
 ========================================================= */
 
-add("#s", "tell me", "Okay! What would you like me to tell you?");
+add(
+    "#s",
+    "tell me",
+    "Okay! What would you like me to tell you?"
+);
 
-add("#s", "can you", "I'll try my best.");
-
+add(
+    "#s",
+    "can you",
+    "I'll try my best."
+);
 
 
 /* =========================================================
    ENDS WITH
 ========================================================= */
 
-add("#e", "please", "Sure!");
-
+add(
+    "#e",
+    "please",
+    "Sure!"
+);
 
 
 /* =========================================================
    WHOLE WORD
 ========================================================= */
 
-add("#w", "banana", "🍌 BANANA.");
-
+add(
+    "#w",
+    "banana",
+    "🍌 BANANA."
+);
 
 
 /* =========================================================
    IGNORE PUNCTUATION
 ========================================================= */
 
-add("#i", "hello", "Hello!");
-
+add(
+    "#i",
+    "hello",
+    "Hello!"
+);
 
 
 /* =========================================================
    RANDOM RESPONSES
 =========================================================
 
-   Put multiple responses with the SAME prompt.
-
-   Faux AI will randomly choose ONE.
+   Multiple responses with the same prompt
+   will randomly choose one.
 
 ========================================================= */
 
-add("#r", "tell me a joke", "Why did the computer go to the doctor? It had a virus!");
+add(
+    "#r",
+    "hello there",
+    "Hello there!"
+);
 
-add("#r", "tell me a joke", "Why was the computer cold? It left its Windows open.");
+add(
+    "#r",
+    "hello there",
+    "Hey there!"
+);
 
-add("#r", "tell me a joke", "What do computers eat? Microchips!");
+add(
+    "#r",
+    "hello there",
+    "Greetings, human."
+);
 
 
 /* =========================================================
-   ANOTHER RANDOM GROUP
+   RANDOM JOKES
 ========================================================= */
 
-add("#r", "hello there", "Hello there!");
+add(
+    "#r",
+    "tell me a joke",
+    "Why did the computer go to the doctor? It had a virus!"
+);
 
-add("#r", "hello there", "Hey!");
+add(
+    "#r",
+    "tell me a joke",
+    "Why was the computer cold? It left its Windows open."
+);
 
-add("#r", "hello there", "Greetings, human.");
-
+add(
+    "#r",
+    "tell me a joke",
+    "What do computers eat? Microchips!"
+);
 
 
 /* =========================================================
    =========================================================
-
-                ADD YOUR OWN RESPONSES HERE
-
+   ADD YOUR OWN RESPONSES HERE
    =========================================================
-
-   JUST COPY THIS:
+   
+   Just copy this:
 
    add("#a", "YOUR PROMPT", "YOUR ANSWER");
-
 
    Example:
 
    add("#a", "what is fortnite", "Fortnite is a game.");
 
-
-   That's literally it.
-
    ========================================================= */
 
 
 /*
-add("#a", "what is roblox", "Roblox is a platform for games.");
+add("#a", "what is roblox", "Roblox is a gaming platform.");
 
 add("#a", "what is your favorite game", "I don't have a favorite game.");
 
@@ -618,26 +627,7 @@ add("#r", "hello", "Hello!");
 add("#r", "hello", "Hey!");
 
 add("#r", "hello", "Greetings!");
-
 */
-
-
-/* =========================================================
-   =========================================================
-
-              EVERYTHING BELOW HERE IS CODE
-
-              YOU DON'T NEED TO EDIT IT
-
-   =========================================================
-   ========================================================= */
-
-
-/* =========================================================
-   RESPONSE STORAGE
-========================================================= */
-
-const responses = [];
 
 
 /* =========================================================
@@ -648,18 +638,15 @@ function add(tag, prompt, answer) {
 
     responses.push({
 
-        tag:
-            tag
+        tag: String(tag)
             .toLowerCase()
             .trim(),
 
-        prompt:
-            prompt
+        prompt: String(prompt)
             .toLowerCase()
             .trim(),
 
-        answer:
-            answer
+        answer: String(answer)
 
     });
 
@@ -672,7 +659,7 @@ function add(tag, prompt, answer) {
 
 function normalize(text) {
 
-    return text
+    return String(text)
         .toLowerCase()
         .trim();
 
@@ -694,7 +681,7 @@ function removePunctuation(text) {
 
 
 /* =========================================================
-   CHECK RESPONSE
+   CHECK NORMAL RESPONSE
 ========================================================= */
 
 function matches(input, response) {
@@ -707,117 +694,79 @@ function matches(input, response) {
 
 
     /* =====================================================
-       #a
-       EXACT
+       #a = EXACT
     ===================================================== */
 
-    if (
-        response.tag === "#a"
-    ) {
+    if (response.tag === "#a") {
 
-        return (
-            userText === trigger
-        );
+        return userText === trigger;
 
     }
 
 
     /* =====================================================
-       #c
-       CONTAINS
+       #c = CONTAINS
     ===================================================== */
 
-    if (
-        response.tag === "#c"
-    ) {
+    if (response.tag === "#c") {
 
-        return (
-            userText.includes(trigger)
-        );
+        return userText.includes(trigger);
 
     }
 
 
     /* =====================================================
-       #s
-       STARTS WITH
+       #s = STARTS WITH
     ===================================================== */
 
-    if (
-        response.tag === "#s"
-    ) {
+    if (response.tag === "#s") {
 
-        return (
-            userText.startsWith(trigger)
-        );
+        return userText.startsWith(trigger);
 
     }
 
 
     /* =====================================================
-       #e
-       ENDS WITH
+       #e = ENDS WITH
     ===================================================== */
 
-    if (
-        response.tag === "#e"
-    ) {
+    if (response.tag === "#e") {
 
-        return (
-            userText.endsWith(trigger)
-        );
+        return userText.endsWith(trigger);
 
     }
 
 
     /* =====================================================
-       #w
-       WHOLE WORD
+       #w = WHOLE WORD
     ===================================================== */
 
-    if (
-        response.tag === "#w"
-    ) {
+    if (response.tag === "#w") {
 
         const words =
             userText.split(/\s+/);
 
-        return (
-            words.includes(trigger)
-        );
+        return words.includes(trigger);
 
     }
 
 
     /* =====================================================
-       #i
-       IGNORE PUNCTUATION
+       #i = IGNORE PUNCTUATION
     ===================================================== */
 
-    if (
-        response.tag === "#i"
-    ) {
+    if (response.tag === "#i") {
 
         userText =
-            removePunctuation(
-                userText
-            );
+            removePunctuation(userText);
 
         trigger =
-            removePunctuation(
-                trigger
-            );
+            removePunctuation(trigger);
 
-        return (
-            userText === trigger
-        );
+        return userText === trigger;
 
     }
 
-
-    /*
-       #r is handled separately.
-    */
 
     return false;
 
@@ -832,31 +781,36 @@ function getResponse(input) {
 
 
     /* =====================================================
-       FIRST: CHECK #r
-    =====================================================
-
-       This makes sure random responses work correctly.
-
+       RANDOM RESPONSES
     ===================================================== */
 
     const randomMatches = [];
+
+    const normalizedInput =
+        normalize(input);
 
 
     for (
         const response of responses
     ) {
 
+        /*
+           Only look at #r responses.
+        */
+
         if (
             response.tag !== "#r"
         ) {
-
             continue;
-
         }
 
 
+        /*
+           #r uses exact matching.
+        */
+
         if (
-            normalize(input) ===
+            normalizedInput ===
             response.prompt
         ) {
 
@@ -870,7 +824,7 @@ function getResponse(input) {
 
 
     /*
-       If there are random responses,
+       If random responses exist,
        randomly select one.
     */
 
@@ -884,31 +838,31 @@ function getResponse(input) {
                 randomMatches.length
             );
 
-
         return (
-            randomMatches[
-                randomIndex
-            ].answer
+            randomMatches[randomIndex]
+                .answer
         );
 
     }
 
 
     /* =====================================================
-       SECOND: CHECK NORMAL RESPONSES
+       NORMAL RESPONSES
     ===================================================== */
-
 
     for (
         const response of responses
     ) {
 
+        /*
+           Skip random responses,
+           because they were checked above.
+        */
+
         if (
             response.tag === "#r"
         ) {
-
             continue;
-
         }
 
 
@@ -927,7 +881,7 @@ function getResponse(input) {
 
 
     /* =====================================================
-       NOTHING FOUND
+       NO MATCH
     ===================================================== */
 
     return "I am unable to answer that.";
@@ -999,7 +953,6 @@ function addMessage(
         avatar
     );
 
-
     inner.appendChild(
         textElement
     );
@@ -1032,10 +985,8 @@ function showTyping() {
             "div"
         );
 
-
     message.className =
         "message ai";
-
 
     message.id =
         "typingMessage";
@@ -1046,7 +997,6 @@ function showTyping() {
             "div"
         );
 
-
     inner.className =
         "message-inner";
 
@@ -1056,10 +1006,8 @@ function showTyping() {
             "div"
         );
 
-
     avatar.className =
         "avatar ai-avatar";
-
 
     avatar.textContent =
         "F";
@@ -1069,7 +1017,6 @@ function showTyping() {
         document.createElement(
             "div"
         );
-
 
     dots.className =
         "typing-dots";
@@ -1085,7 +1032,6 @@ function showTyping() {
     inner.appendChild(
         avatar
     );
-
 
     inner.appendChild(
         dots
@@ -1119,13 +1065,8 @@ function hideTyping() {
             "typingMessage"
         );
 
-
-    if (
-        typing
-    ) {
-
+    if (typing) {
         typing.remove();
-
     }
 
 }
@@ -1141,14 +1082,12 @@ function sendMessage() {
         promptInput.value.trim();
 
 
-    if (
-        input === ""
-    ) {
-
+    if (input === "") {
         return;
-
     }
 
+
+    /* Show user message */
 
     addMessage(
         input,
@@ -1156,16 +1095,17 @@ function sendMessage() {
     );
 
 
-    promptInput.value =
-        "";
+    /* Clear input */
 
+    promptInput.value = "";
+
+
+    /* Show typing */
 
     showTyping();
 
 
-    /*
-       Fake thinking time.
-    */
+    /* Fake thinking delay */
 
     const delay =
         500 +
@@ -1199,14 +1139,28 @@ function sendMessage() {
 
 
 /* =========================================================
-   BUTTON
+   GET ELEMENTS
 ========================================================= */
+
+const chat =
+    document.getElementById(
+        "chat"
+    );
+
+const promptInput =
+    document.getElementById(
+        "promptInput"
+    );
 
 const sendButton =
     document.getElementById(
         "sendButton"
     );
 
+
+/* =========================================================
+   SEND BUTTON
+========================================================= */
 
 sendButton.addEventListener(
     "click",
@@ -1215,14 +1169,8 @@ sendButton.addEventListener(
 
 
 /* =========================================================
-   INPUT
+   ENTER KEY
 ========================================================= */
-
-const promptInput =
-    document.getElementById(
-        "promptInput"
-    );
-
 
 promptInput.addEventListener(
     "keydown",
@@ -1240,17 +1188,6 @@ promptInput.addEventListener(
 
     }
 );
-
-
-/* =========================================================
-   CHAT
-========================================================= */
-
-const chat =
-    document.getElementById(
-        "chat"
-    );
-
 
 </script>
 
